@@ -77,33 +77,27 @@ type URLRequest struct {
 	Builtin bool              `json:"builtin"`
 }
 
-func ParseSpecification(options *types.Options) (*Specification, error) {
+func LoadContent(options *types.Options) (content []byte, err error) {
 	// Check if the input target is a URL or a file
-	_, err := url.ParseRequestURI(options.InputTarget)
-	var content []byte
+	_, err = url.ParseRequestURI(options.InputTarget)
 	if err != nil {
 		content, err = utils.ReadFile(options.InputTarget)
 	} else {
 		content, err = utils.ReadFromURL(options.InputTarget)
 	}
-	if err != nil {
-		return nil, err
-	}
+	return
+}
 
+func ParseSpecification(content []byte) (*Specification, error) {
 	var api Specification
-	err = json.Unmarshal(content, &api)
+	err := json.Unmarshal(content, &api)
 	if err != nil {
 		return nil, errorutil.NewWithErr(err).Msgf("could not parse json file")
 	}
 	return &api, nil
 }
 
-func ParseEndpoints(options *types.Options) (endpoints []URLRequest, error error) {
-	api, err := ParseSpecification(options)
-	if err != nil {
-		return
-	}
-
+func ParseEndpoints(api *Specification) (endpoints []URLRequest, error error) {
 	for path, routes := range api.Routes {
 		for _, endpoint := range routes.Endpoints {
 			var parameters Parameters

@@ -22,7 +22,17 @@ func Execute(options *types.Options) error {
 		return errorutil.NewWithErr(err).Msgf("could not validate options")
 	}
 
-	endpoints, err := engine.ParseEndpoints(options)
+	content, err := engine.LoadContent(options)
+	if err != nil {
+		return errorutil.NewWithErr(err).Msgf("Could not load API content")
+	}
+
+	spec, err := engine.ParseSpecification(content)
+	if err != nil {
+		return errorutil.NewWithErr(err).Msgf("Could not parse API specification")
+	}
+
+	endpoints, err := engine.ParseEndpoints(spec)
 	if err != nil {
 		return errorutil.NewWithErr(err).Msgf("could not parse endpoints")
 	}

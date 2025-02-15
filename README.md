@@ -5,15 +5,32 @@
 
 ## WPJSON As Library 📚
 
-```
+```go
+package main
+
+import (
+	"github.com/oneaudit/go-wpjson/pkg/engine"
+	"github.com/oneaudit/go-wpjson/pkg/types"
+)
+
+func main() {
+	options := types.Options{}
+    content, err := engine.LoadContent(options)
+    spec, err := engine.ParseSpecification(content)
+    endpoints, err := engine.ParseEndpoints(spec)
+	// ...
+}
 ```
 
 ## WPJSON CLI Usage 🤖
 
-WPJson requires **Go 1.22+** to install successfully.
+WPJson requires **Go 1.21+** to install successfully.
 
 ```console
 CGO_ENABLED=1 go install github.com/oneaudit/go-wpjson/cmd/go-wpjson@latest
+```
+
+```
 wpjson-go -h
 ```
 
