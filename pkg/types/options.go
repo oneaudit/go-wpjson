@@ -7,8 +7,8 @@ import (
 )
 
 type Options struct {
-	// InputFile input file
-	InputFile string
+	// InputTarget input file
+	InputTarget string
 	// OutputFile output file
 	OutputFile string
 	// Silent shows only output

@@ -32,7 +32,7 @@ func readFlags() (*goflags.FlagSet, error) {
 	flagSet.SetDescription(`A toolkit to parse WordPress Rest API specification.`)
 
 	flagSet.CreateGroup("input", "Target",
-		flagSet.StringVarP(&options.InputFile, "target", "t", "", "target input file to parse"),
+		flagSet.StringVarP(&options.InputTarget, "target", "t", "", "target input file or URL to parse"),
 	)
 
 	flagSet.CreateGroup("config", "Configuration",
