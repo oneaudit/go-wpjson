@@ -1,6 +1,8 @@
 package runner
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/oneaudit/go-wpjson/pkg/engine"
 	"github.com/oneaudit/go-wpjson/pkg/types"
 	"github.com/projectdiscovery/gologger"
@@ -20,9 +22,14 @@ func Execute(options *types.Options) error {
 		return errorutil.NewWithErr(err).Msgf("could not validate options")
 	}
 
-	_, err := engine.ParseEndpoints(options)
+	endpoints, err := engine.ParseEndpoints(options)
 	if err != nil {
 		return errorutil.NewWithErr(err).Msgf("could not parse endpoints")
+	}
+
+	for _, endpoint := range endpoints {
+		obj, _ := json.Marshal(endpoint)
+		fmt.Println(string(obj))
 	}
 
 	return nil

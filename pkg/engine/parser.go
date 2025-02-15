@@ -68,7 +68,12 @@ type Parameter struct {
 	MaxItems int `json:"maxItems"`
 }
 
-func ParseEndpoints(options *types.Options) (api *Specification, error error) {
+type URLRequest struct {
+	URL     string `json:"url"`
+	Methods string `json:"method"`
+}
+
+func ParseEndpoints(options *types.Options) (endpoints []URLRequest, error error) {
 	// Check if the input target is a URL or a file
 	_, error = url.ParseRequestURI(options.InputTarget)
 	var content []byte
@@ -81,6 +86,7 @@ func ParseEndpoints(options *types.Options) (api *Specification, error error) {
 		return
 	}
 
+	var api Specification
 	err := json.Unmarshal(content, &api)
 	if err != nil {
 		return nil, errorutil.NewWithErr(err).Msgf("could not parse json file")
@@ -98,6 +104,14 @@ func ParseEndpoints(options *types.Options) (api *Specification, error error) {
 				return nil, errorutil.NewWithErr(err).Msgf("could not parse json route %s", path)
 			} else {
 				endpoint.Parameters = parameters
+			}
+
+			for _, method := range endpoint.Methods {
+				request := URLRequest{
+					URL:     "/wp-json" + utils.ExtractURLPathParameters(path),
+					Methods: method,
+				}
+				endpoints = append(endpoints, request)
 			}
 		}
 	}
