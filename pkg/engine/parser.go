@@ -71,9 +71,10 @@ type Parameter struct {
 
 type URLRequest struct {
 	URL     string            `json:"url"`
-	Methods string            `json:"method"`
+	Method  string            `json:"method"`
 	Body    string            `json:"body"`
 	Headers map[string]string `json:"headers"`
+	Builtin bool              `json:"builtin"`
 }
 
 func ParseSpecification(options *types.Options) (*Specification, error) {
@@ -120,10 +121,11 @@ func ParseEndpoints(options *types.Options) (endpoints []URLRequest, error error
 			for _, method := range endpoint.Methods {
 				request := URLRequest{
 					URL:     "/wp-json" + utils.ExtractURLPathParameters(path),
-					Methods: method,
+					Method:  method,
 					Body:    "",
 					Headers: make(map[string]string),
 				}
+				request.Builtin = utils.IsWordPressEndpoint(request.URL)
 
 				query := strings.Builder{}
 				rawBody := make(map[string]interface{})

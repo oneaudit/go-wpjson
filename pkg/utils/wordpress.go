@@ -1,40 +1,129 @@
 package utils
 
-import "strings"
+var wordpress672 = []string{
+	"/wp-json/",
+	"/wp-json/batch/v1",
+	"/wp-json/oembed/1.0",
+	"/wp-json/oembed/1.0/embed",
+	"/wp-json/oembed/1.0/proxy",
+	"/wp-json/wp-block-editor/v1",
+	"/wp-json/wp-block-editor/v1/export",
+	"/wp-json/wp-block-editor/v1/navigation-fallback",
+	"/wp-json/wp-block-editor/v1/url-details",
+	"/wp-json/wp-site-health/v1",
+	"/wp-json/wp-site-health/v1/directory-sizes",
+	"/wp-json/wp-site-health/v1/tests/authorization-header",
+	"/wp-json/wp-site-health/v1/tests/background-updates",
+	"/wp-json/wp-site-health/v1/tests/dotorg-communication",
+	"/wp-json/wp-site-health/v1/tests/https-status",
+	"/wp-json/wp-site-health/v1/tests/loopback-requests",
+	"/wp-json/wp-site-health/v1/tests/page-cache",
+	"/wp-json/wp/v2",
+	"/wp-json/wp/v2/block-directory/search",
+	"/wp-json/wp/v2/block-patterns/categories",
+	"/wp-json/wp/v2/block-patterns/patterns",
+	"/wp-json/wp/v2/block-renderer/<name>",
+	"/wp-json/wp/v2/blocks",
+	"/wp-json/wp/v2/blocks/<id>",
+	"/wp-json/wp/v2/blocks/<id>/autosaves",
+	"/wp-json/wp/v2/blocks/<parent>/autosaves/<id>",
+	"/wp-json/wp/v2/blocks/<parent>/revisions",
+	"/wp-json/wp/v2/blocks/<parent>/revisions/<id>",
+	"/wp-json/wp/v2/block-types",
+	"/wp-json/wp/v2/block-types/<namespace>",
+	"/wp-json/wp/v2/block-types/<namespace>/<name>",
+	"/wp-json/wp/v2/categories",
+	"/wp-json/wp/v2/categories/<id>",
+	"/wp-json/wp/v2/comments",
+	"/wp-json/wp/v2/comments/<id>",
+	"/wp-json/wp/v2/font-collections",
+	"/wp-json/wp/v2/font-collections/<slug>",
+	"/wp-json/wp/v2/font-families",
+	"/wp-json/wp/v2/font-families/<font_family_id>/font-faces",
+	"/wp-json/wp/v2/font-families/<font_family_id>/font-faces/<id>",
+	"/wp-json/wp/v2/font-families/<id>",
+	"/wp-json/wp/v2/global-styles/<id>",
+	"/wp-json/wp/v2/global-styles/<parent>/revisions",
+	"/wp-json/wp/v2/global-styles/<parent>/revisions/<id>",
+	"/wp-json/wp/v2/global-styles/themes/<stylesheet>",
+	"/wp-json/wp/v2/global-styles/themes/<stylesheet>/variations",
+	"/wp-json/wp/v2/media",
+	"/wp-json/wp/v2/media/<id>",
+	"/wp-json/wp/v2/media/<id>/edit",
+	"/wp-json/wp/v2/menu-items",
+	"/wp-json/wp/v2/menu-items/<id>",
+	"/wp-json/wp/v2/menu-items/<id>/autosaves",
+	"/wp-json/wp/v2/menu-items/<parent>/autosaves/<id>",
+	"/wp-json/wp/v2/menu-locations",
+	"/wp-json/wp/v2/menu-locations/<location>",
+	"/wp-json/wp/v2/menus",
+	"/wp-json/wp/v2/menus/<id>",
+	"/wp-json/wp/v2/navigation",
+	"/wp-json/wp/v2/navigation/<id>",
+	"/wp-json/wp/v2/navigation/<id>/autosaves",
+	"/wp-json/wp/v2/navigation/<parent>/autosaves/<id>",
+	"/wp-json/wp/v2/navigation/<parent>/revisions",
+	"/wp-json/wp/v2/navigation/<parent>/revisions/<id>",
+	"/wp-json/wp/v2/pages",
+	"/wp-json/wp/v2/pages/<id>",
+	"/wp-json/wp/v2/pages/<id>/autosaves",
+	"/wp-json/wp/v2/pages/<parent>/autosaves/<id>",
+	"/wp-json/wp/v2/pages/<parent>/revisions",
+	"/wp-json/wp/v2/pages/<parent>/revisions/<id>",
+	"/wp-json/wp/v2/pattern-directory/patterns",
+	"/wp-json/wp/v2/plugins",
+	"/wp-json/wp/v2/plugins/<plugin>",
+	"/wp-json/wp/v2/search",
+	"/wp-json/wp/v2/settings",
+	"/wp-json/wp/v2/sidebars",
+	"/wp-json/wp/v2/sidebars/<id>",
+	"/wp-json/wp/v2/statuses",
+	"/wp-json/wp/v2/statuses/<status>",
+	"/wp-json/wp/v2/tags",
+	"/wp-json/wp/v2/tags/<id>",
+	"/wp-json/wp/v2/taxonomies",
+	"/wp-json/wp/v2/taxonomies/<taxonomy>",
+	"/wp-json/wp/v2/template-parts",
+	"/wp-json/wp/v2/template-parts/<id>",
+	"/wp-json/wp/v2/template-parts/<id>/autosaves",
+	"/wp-json/wp/v2/template-parts/lookup",
+	"/wp-json/wp/v2/template-parts/<parent>/autosaves/<id>",
+	"/wp-json/wp/v2/template-parts/<parent>/revisions",
+	"/wp-json/wp/v2/template-parts/<parent>/revisions/<id>",
+	"/wp-json/wp/v2/templates",
+	"/wp-json/wp/v2/templates/<id>",
+	"/wp-json/wp/v2/templates/<id>/autosaves",
+	"/wp-json/wp/v2/templates/lookup",
+	"/wp-json/wp/v2/templates/<parent>/autosaves/<id>",
+	"/wp-json/wp/v2/templates/<parent>/revisions",
+	"/wp-json/wp/v2/templates/<parent>/revisions/<id>",
+	"/wp-json/wp/v2/themes",
+	"/wp-json/wp/v2/themes/<stylesheet>",
+	"/wp-json/wp/v2/types",
+	"/wp-json/wp/v2/types/<type>",
+	"/wp-json/wp/v2/users",
+	"/wp-json/wp/v2/users/<id>",
+	"/wp-json/wp/v2/users/me",
+	"/wp-json/wp/v2/users/<user_id>/application-passwords",
+	"/wp-json/wp/v2/users/<user_id>/application-passwords/introspect",
+	"/wp-json/wp/v2/users/<user_id>/application-passwords/<uuid>",
+	"/wp-json/wp/v2/widgets",
+	"/wp-json/wp/v2/widgets/<id>",
+	"/wp-json/wp/v2/widget-types",
+	"/wp-json/wp/v2/widget-types/<id>",
+	"/wp-json/wp/v2/widget-types/<id>/encode",
+	"/wp-json/wp/v2/widget-types/<id>/render",
+	"/wp-json/wp/v2/wp_pattern_category",
+	"/wp-json/wp/v2/wp_pattern_category/<id>",
+}
 
-func ExtractURLPathParameters(wpURL string) string {
-	const separator1 = "(?P"
-	const separator2 = "\u003c"
-	const separator3 = "\u003e"
-	var result strings.Builder
-	i := 0
-	for i < len(wpURL) {
-		if i+len(separator1) < len(wpURL) && wpURL[i:i+len(separator1)] == separator1 {
-			i += len(separator1)
-			i += len(separator2)
-			result.WriteRune('<')
+var wordpressBaseEndpoints = wordpress672
 
-			for i+len(separator3) < len(wpURL) && wpURL[i:i+len(separator3)] != separator3 {
-				result.WriteByte(wpURL[i])
-				i += 1
-			}
-			i += len(separator3)
-			result.WriteRune('>')
-
-			depth := 1
-			for i < len(wpURL) && depth != 0 {
-				if wpURL[i] == '(' {
-					depth++
-				} else if wpURL[i] == ')' {
-					depth--
-				}
-				i++
-			}
-			i--
-		} else {
-			result.WriteByte(wpURL[i])
+func IsWordPressEndpoint(URL string) bool {
+	for _, endpoint := range wordpressBaseEndpoints {
+		if endpoint == URL {
+			return true
 		}
-		i++
 	}
-	return result.String()
+	return false
 }
