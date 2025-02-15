@@ -14,17 +14,17 @@ import (
 )
 
 func main() {
-	options := types.Options{}
-    content, err := engine.LoadContent(options)
-    spec, err := engine.ParseSpecification(content)
-    endpoints, err := engine.ParseEndpoints(spec)
+	options := types.Options{ /*options*/ }
+	content, _ := engine.LoadContent(options)
+	spec, _ := engine.ParseSpecification(content)
+	endpoints, _ := engine.ParseEndpoints(spec)
 	// ...
 }
 ```
 
 ## WPJSON CLI Usage 🤖
 
-WPJson requires **Go 1.21+** to install successfully.
+WPJson requires **Go 1.23+** to install successfully.
 
 ```console
 CGO_ENABLED=1 go install github.com/oneaudit/go-wpjson/cmd/go-wpjson@latest

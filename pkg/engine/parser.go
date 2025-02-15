@@ -169,10 +169,11 @@ func ParseEndpoints(api *Specification) (endpoints []URLRequest, error error) {
 				}
 				payload, err := json.Marshal(rawBody)
 				if err == nil {
-					request.Headers["Content-Type"] = "application/json"
 					request.Body = string(payload)
 					if request.Body == "{}" {
 						request.Body = ""
+					} else {
+						request.Headers["Content-Type"] = "application/json"
 					}
 				}
 
